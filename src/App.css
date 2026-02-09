@@ -1,68 +1,95 @@
-.meals {
-  align-items: center;
-  background: #0fa36b;
-  color: #464646;
+/* Importação de fonte para um visual mais clean */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap");
+
+:root {
+  --bg-dark: #050505;
+  --premium-white: rgba(255, 255, 255, 0.85);
+  --low-opacity-white: rgba(255, 255, 255, 0.05);
+  --glow-color: rgba(255, 255, 255, 0.02);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--premium-white);
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+}
+
+/* Container Principal - Fundo Dinâmico */
+.app-main-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background: radial-gradient(circle at 50% 0%, #111111 0%, #050505 100%);
   display: flex;
   flex-direction: column;
-  font-family: sans-serif;
-  height: 100vh;
+}
+
+/* Brilho (Glow) Ambiental */
+.premium-ambient-glow {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 50% 20%,
+    var(--glow-color),
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Substituição da classe .meals para o novo padrão */
+.meals {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   width: 100%;
+  z-index: 2;
+  /* Removido o fundo verde e height fixo para permitir scroll */
 }
 
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 80vh;
+/* Linha de Gradiente (Side Gradients) */
+.gradient-line-horizontal {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
 }
 
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
+/* Ajuste na Logo para o padrão Premium */
+.logo {
+  font-size: 1.5rem;
+  font-weight: 200;
+  letter-spacing: 1em;
+  text-transform: uppercase;
+  color: var(--premium-white);
+  margin: 2rem 0;
+  /* Removida a animação shake antiga */
 }
 
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
-}
-*/
-
-.meals > .logo {
-  animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
-  font-weight: 900;
-}
-
-@keyframes shake {
-
-  0% {
-    transform: rotate(5deg);
-  }
-
-  50% {
-    transform: rotate(-5deg);
-  }
-
-  100% {
-    transform: rotate(5deg);
-  }
-}
-
-@keyframes clink {
-
-  0% {
-    transform: rotate(-10deg);
-  }
-
-  50% {
-    transform: rotate(20deg);
-  }
-
-  100% {
-    transform: rotate(-10deg);
-  }
+/* Gradiente de Subida para o rodapé */
+.bottom-glow-line {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.03), transparent);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+  z-index: 10;
 }
