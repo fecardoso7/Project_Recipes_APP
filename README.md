@@ -1,6 +1,6 @@
 # ARQUIVO GASTRONÔMICO
 
-### Interface Premium de Receitas & Mixologia
+### Interface Premium de Receitas
 
 ---
 
@@ -9,7 +9,8 @@
 O **Arquivo Gastronômico** é uma aplicação mobile-first desenvolvida como projeto final do módulo de Front-end na **Trybe**. A aplicação permite que o usuário explore, prepare e gerencie receitas de comida e coquetéis através de uma interface refinada e intuitiva.
 
 <div align="center">
-  <img src="./public/preview.png" alt="Preview do Arquivo Gastronômico" width="100%">
+  <sub>Preview Mobile</sub><br/>
+  <img src="./public/preview.png" alt="Preview" width="350" style="border-radius: 20px; border: 1px solid #333;">
 </div>
 
 O grande diferencial desta versão é a **refatoração estética e técnica**, onde apliquei conceitos de _Luxury Minimalist Design_, utilizando Glassmorphism, tipografia técnica e um sistema de design consistente para elevar a experiência do usuário.
@@ -72,13 +73,5 @@ Este projeto foi construído em colaboração com:
 - [**Luiz Arlochi**](https://github.com/luizArlochi)
 - [**Glenno do Ouro**](https://github.com/glennodoouro)
 - [**Jeoflan Junior**](https://github.com/Jeoflan)
-
----
-
-## 7. Desenvolvimento Técnico (UI/UX)
-
-As melhorias implementadas seguem o padrão:
-
-> **Fundo dinâmico, linha de gradiente, brilho (glow), gradiente de subida e baixa opacidade para manter o aspecto 'Premium'.**
 
 ---
