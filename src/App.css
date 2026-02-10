@@ -1,11 +1,14 @@
-/* Importação de fonte para um visual mais clean */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap");
+/* Importação de tipografia: Inter para interface e Playfair para títulos */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Playfair+Display:wght@400;500&display=swap");
 
 :root {
-  --bg-dark: #050505;
-  --premium-white: rgba(255, 255, 255, 0.85);
-  --low-opacity-white: rgba(255, 255, 255, 0.05);
-  --glow-color: rgba(255, 255, 255, 0.02);
+  /* Definição da Paleta Gallery Light Refined: tons neutros e acento metálico */
+  --bg-primary: #F9F7F5;
+  --bg-pure: #FFFFFF;
+  --accent-gold: #c5a47e;
+  --text-main: #2D2A26;
+  --text-muted: #8A847C;
+  --line-color: rgba(197, 164, 126, 0.15);
 }
 
 * {
@@ -15,81 +18,92 @@
 }
 
 body {
-  background-color: var(--bg-dark);
-  color: var(--premium-white);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
   font-family: "Inter", sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Container Principal - Fundo Dinâmico */
+/* Estrutura base da aplicação com suporte a flexbox vertical */
 .app-main-wrapper {
   min-height: 100vh;
   width: 100%;
   position: relative;
-  background: radial-gradient(circle at 50% 0%, #111111 0%, #050505 100%);
   display: flex;
   flex-direction: column;
 }
 
-/* Brilho (Glow) Ambiental */
+/* Camada de iluminação ambiental: Gradiente radial fixo em z-index negativo */
 .premium-ambient-glow {
   position: fixed;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   width: 100%;
   height: 100%;
+  /* Gradiente de iluminação superior para profundidade visual */
   background: radial-gradient(
-    circle at 50% 20%,
-    var(--glow-color),
-    transparent 70%
+    circle at 50% -10%,
+    var(--bg-pure) 0%,
+    var(--bg-primary) 100%
   );
   pointer-events: none;
-  z-index: 1;
+  z-index: -1; 
 }
 
-/* Substituição da classe .meals para o novo padrão */
-.meals {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+/* Camada de conteúdo principal: z-index superior para garantir interatividade */
+.content-overlay {
+  position: relative;
+  z-index: 10;
   width: 100%;
-  z-index: 2;
-  /* Removido o fundo verde e height fixo para permitir scroll */
 }
 
-/* Linha de Gradiente (Side Gradients) */
+/* Estilização de títulos com serifas e alto espaçamento entre caracteres */
+.premium-title {
+  font-family: "Playfair Display", serif;
+  color: var(--text-main);
+  letter-spacing: 0.3em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+/* Divisor horizontal com fade nas extremidades para suavidade visual */
 .gradient-line-horizontal {
   height: 1px;
   width: 100%;
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.1),
+    var(--line-color),
     transparent
   );
 }
 
-/* Ajuste na Logo para o padrão Premium */
+/* Identidade visual da aplicação com foco em elegância e minimalismo */
 .logo {
-  font-size: 1.5rem;
-  font-weight: 200;
-  letter-spacing: 1em;
+  font-family: "Playfair Display", serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.8em;
+  color: var(--accent-gold);
+  margin: 4rem 0;
+  text-align: center;
   text-transform: uppercase;
-  color: var(--premium-white);
-  margin: 2rem 0;
-  /* Removida a animação shake antiga */
 }
 
-/* Gradiente de Subida para o rodapé */
+/* Elemento de fechamento visual fixo na base da viewport */
 .bottom-glow-line {
   position: fixed;
   bottom: 0;
+  left: 0;
   width: 100%;
-  height: 100px;
-  background: linear-gradient(to top, rgba(255, 255, 255, 0.03), transparent);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  pointer-events: none;
-  z-index: 10;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-gold),
+    transparent
+  );
+  opacity: 0.4;
+  z-index: 20;
 }

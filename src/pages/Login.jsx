@@ -5,178 +5,245 @@ import { saveToLocalStorage } from "../services/storage";
 
 export default function Login() {
   const history = useHistory();
+  
+  // Estado para os campos de entrada
   const [user, setUser] = useState({ email: "", password: "" });
+  
+  // Estado para validar o formulário
   const [isValid, setIsValid] = useState(false);
 
+  // Manipula as mudanças nos inputs
   const handleChange = ({ target }) => {
     const { name, value } = target;
     setUser({ ...user, [name]: value });
   };
 
+  // Salva o login e redireciona
   const handleSubmit = () => {
     saveToLocalStorage("user", { email: user.email });
     history.push("/meals");
   };
 
+  // Efeito para validar email e senha (mínimo 6 caracteres)
   useEffect(() => {
     const { email, password } = user;
     const MIN_PASSWORD_LENGTH = 6;
     const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-    const fieldsValid =
-      emailRegex.test(email) && password.length > MIN_PASSWORD_LENGTH;
+    const fieldsValid = emailRegex.test(email) && password.length > MIN_PASSWORD_LENGTH;
     setIsValid(fieldsValid);
   }, [user]);
 
+  // Definição dos estilos em JS
   const styles = {
     container: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
       width: "100vw",
       height: "100vh",
-      backgroundColor: "#050505",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
       position: "fixed",
-      top: 0,
-      left: 0,
-      fontFamily: "'Inter', sans-serif",
+      overflow: "hidden",
+      backgroundColor: "#1a1a1a",
+    },
+    background: {
+      position: "absolute",
+      width: "110%",
+      height: "110%",
+      backgroundImage: "url('https://images.unsplash.com/photo-1543353071-873f17a7a088?q=80&w=2070&auto=format&fit=crop')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      filter: "brightness(0.75)",
+      zIndex: 0,
+    },
+    glassPanel: {
+      width: "90%",
+      maxWidth: "420px",
+      backgroundColor: "rgba(255, 255, 255, 0.65)",
+      backdropFilter: "blur(25px) saturate(160%)",
+      border: "1px solid rgba(255, 255, 255, 0.5)",
+      borderRadius: "8px",
+      padding: "60px 45px",
+      display: "flex",
+      flexDirection: "column",
+      gap: "40px",
+      boxShadow: "0 30px 60px -15px rgba(0, 0, 0, 0.3)",
+      zIndex: 10,
+      position: "relative",
     },
     header: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      marginBottom: "50px",
-    },
-    title: {
-      fontSize: "18px",
-      letterSpacing: "0.6em",
-      textTransform: "uppercase",
-      fontWeight: "300",
-      color: "#c5a47e",
-      margin: "10px 0",
+      textAlign: "center",
+      marginBottom: "10px",
     },
     subtitle: {
-      fontSize: "9px",
-      letterSpacing: "0.8em",
+      fontSize: "10px",
+      letterSpacing: "0.3em",
       textTransform: "uppercase",
-      color: "rgba(255,255,255,0.4)",
-      fontWeight: "200",
+      color: "#555",
+      fontWeight: "500",
+      marginBottom: "8px",
+      display: "block",
+      fontFamily: "'Inter', sans-serif",
     },
-    card: {
+    title: {
+      fontFamily: "'Playfair Display', serif",
+      fontSize: "42px",
+      letterSpacing: "-0.01em",
+      fontWeight: "600",
+      color: "#2D2A26",
+      margin: 0,
+    },
+    form: {
       width: "100%",
-      maxWidth: "360px",
-      padding: "50px",
-      backgroundColor: "rgba(255,255,255,0.01)",
-      border: "1px solid rgba(197, 164, 126, 0.08)",
-      borderRadius: "1px",
-      backdropFilter: "blur(30px)",
       display: "flex",
       flexDirection: "column",
-      gap: "35px",
-      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
+      gap: "24px",
+    },
+    inputGroup: {
+      display: "flex",
+      flexDirection: "column",
+      gap: "8px",
+    },
+    label: {
+      fontSize: "11px",
+      color: "#333",
+      fontWeight: "700",
+      textTransform: "uppercase",
+      letterSpacing: "0.08em",
+      fontFamily: "'Inter', sans-serif",
     },
     input: {
       width: "100%",
-      background: "transparent",
-      border: "none",
-      borderBottom: "1px solid rgba(197, 164, 126, 0.15)",
-      padding: "15px 0",
-      fontSize: "10px",
-      letterSpacing: "0.2em",
-      color: "#f4f4f4",
+      backgroundColor: "#FFFFFF",
+      border: "1px solid rgba(0,0,0,0.08)",
+      borderRadius: "4px",
+      padding: "16px",
+      fontSize: "14px",
+      color: "#2D2A26",
       outline: "none",
-      textAlign: "center",
-      textTransform: "lowercase",
-      transition: "all 0.4s ease",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.02)",
+      transition: "all 0.3s ease",
+      fontFamily: "'Inter', sans-serif",
     },
     button: {
       width: "100%",
-      padding: "22px",
-      background: "transparent",
-      border: "1px solid rgba(197, 164, 126, 0.3)",
-      color: "#c5a47e",
-      fontSize: "9px",
-      letterSpacing: "0.5em",
+      padding: "18px",
+      backgroundColor: "#A68A64",
+      border: "none",
+      borderRadius: "4px",
+      color: "#FFFFFF",
+      fontSize: "12px",
+      letterSpacing: "0.15em",
       textTransform: "uppercase",
+      fontWeight: "600",
       cursor: "pointer",
-      transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
-      opacity: isValid ? 1 : 0.1,
       marginTop: "10px",
-    },
+      transition: "all 0.3s ease",
+      opacity: isValid ? 1 : 0.6,
+      boxShadow: "0 10px 20px -5px rgba(166, 138, 100, 0.3)",
+    }
   };
 
   return (
     <div style={styles.container}>
-      {/* Brilho de Ambiente (Glow) */}
-      <div
-        style={{
-          position: "absolute",
-          top: "15%",
-          width: "400px",
-          height: "400px",
-          background:
-            "radial-gradient(circle, rgba(197, 164, 126, 0.03) 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
+      {/* Importação de fontes externas */}
+      <style>
+        {`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;700&display=swap');`}
+      </style>
 
-      <header style={styles.header}>
-        <span style={styles.subtitle}>Arquivo Gastronômico</span>
-        <h1 style={styles.title}>Culinária</h1>
-        <div
-          style={{
-            height: "1px",
-            width: "30px",
-            backgroundColor: "#c5a47e",
-            opacity: 0.3,
-            marginTop: "10px",
-          }}
-        />
-      </header>
+      {/* Camada de fundo animada */}
+      <div style={styles.background} className="bg-pan" />
 
-      <form style={styles.card}>
-        <input
-          type="email"
-          name="email"
-          placeholder="seu@email.com"
-          style={styles.input}
-          value={user.email}
-          onChange={handleChange}
-        />
+      {/* Painel de Login */}
+      <div style={styles.glassPanel} className="panel-enter">
+        <header style={styles.header}>
+          <span style={styles.subtitle}>Arquivo Gastronômico</span>
+          <h1 style={styles.title}>Culinária</h1>
+        </header>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="senha"
-          style={styles.input}
-          value={user.password}
-          onChange={handleChange}
-        />
+        <form style={styles.form}>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>E-mail</label>
+            <input
+              type="email"
+              name="email"
+              data-testid="email-input"
+              style={styles.input}
+              className="input-interaction"
+              value={user.email}
+              onChange={handleChange}
+              placeholder="Digite seu e-mail"
+            />
+          </div>
 
-        <button
-          type="button"
-          disabled={!isValid}
-          onClick={handleSubmit}
-          style={styles.button}
-          onMouseOver={(e) =>
-            isValid && (e.target.style.background = "rgba(197, 164, 126, 0.05)")
-          }
-          onMouseOut={(e) => (e.target.style.background = "transparent")}
-        >
-          Descobrir Sabores
-        </button>
-      </form>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Senha</label>
+            <input
+              type="password"
+              name="password"
+              data-testid="password-input"
+              style={styles.input}
+              className="input-interaction"
+              value={user.password}
+              onChange={handleChange}
+              placeholder="Digite sua senha"
+            />
+          </div>
 
-      {/* Linha de Gradiente Final */}
-      <div
-        style={{
-          marginTop: "70px",
-          height: "1px",
-          width: "140px",
-          background:
-            "linear-gradient(90deg, transparent, rgba(197, 164, 126, 0.15), transparent)",
-        }}
-      />
+          <button
+            type="button"
+            data-testid="login-submit-btn"
+            disabled={!isValid}
+            onClick={handleSubmit}
+            style={styles.button}
+            className="btn-interaction"
+          >
+            Entrar
+          </button>
+        </form>
+      </div>
+
+      {/* Estilos CSS para animações e interações */}
+      <style>{`
+        .bg-pan {
+          animation: panImage 40s ease-in-out infinite alternate;
+        }
+        @keyframes panImage {
+          0% { transform: scale(1); }
+          100% { transform: scale(1.1); }
+        }
+
+        .panel-enter {
+          animation: slideUpFade 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        @keyframes slideUpFade {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-interaction:focus {
+          border-color: #A68A64 !important;
+          transform: translateY(-1px);
+          box-shadow: 0 8px 20px rgba(0,0,0,0.06) !important;
+        }
+        
+        ::placeholder {
+          color: #999;
+          font-weight: 400;
+          font-size: 13px;
+        }
+
+        .btn-interaction:hover {
+          background-color: #8C7352 !important;
+          transform: translateY(-2px);
+          box-shadow: 0 15px 30px -5px rgba(166, 138, 100, 0.5) !important;
+          letter-spacing: 0.2em !important;
+        }
+        
+        .btn-interaction:disabled {
+          cursor: not-allowed;
+          transform: none;
+        }
+      `}</style>
     </div>
   );
 }

@@ -1,122 +1,88 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from './Context';
 import {
-  fetchMealByIngredient,
-  fetchMealByFirstLetter,
   fetchMealByName,
   fetchMealsList,
   fetchFilteredMeals,
 } from '../services/theMealApi';
 import {
-  fetchDrinkByFirstLetter,
-  fetchDrinkByIngredient,
   fetchDrinkByName,
   fetchDrinksList,
   fetchFilteredDrinks,
+  fetchDrinkByFirstLetter,
 } from '../services/theCocktailApi';
 
 function ContextProvider({ children }) {
-  const [searchMethod, setSearchMethod] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
+  // Estados globais para receitas, filtros e parâmetros de busca
   const [recipes, setRecipes] = useState([]);
   const [filters, setFilters] = useState([]);
+  const [searchMethod, setSearchMethod] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const renderFilters = async (pathname) => {
-    if (pathname === '/meals') {
-      const mealsList = await fetchMealsList();
-      setFilters(mealsList);
-    }
-    if (pathname === '/drinks') {
-      const drinksList = await fetchDrinksList();
-      setFilters(drinksList);
-    }
+  // Normaliza o retorno das APIs para garantir o uso de arrays
+  const dataExtractor = (data, type) => {
+    if (!data) return [];
+    if (Array.isArray(data)) return data;
+    if (type === 'meals' && data.meals) return data.meals;
+    if (type === 'drinks' && data.drinks) return data.drinks;
+    return [];
   };
 
-  const renderFilteredRecipes = async (pathname, filter) => {
-    if (pathname === '/meals') {
-      const filteredMeals = await fetchFilteredMeals(filter);
-      setRecipes(filteredMeals);
-    }
-    if (pathname === '/drinks') {
-      const filteredDrinks = await fetchFilteredDrinks(filter);
-      setRecipes(filteredDrinks);
-    }
-  };
+  // Busca as categorias de filtros baseadas na rota atual
+  const renderFilters = useCallback(async (pathname) => {
+    const type = pathname === '/meals' ? 'meals' : 'drinks';
+    const rawData = pathname === '/meals' ? await fetchMealsList() : await fetchDrinksList();
+    setFilters(dataExtractor(rawData, type));
+  }, []);
 
-  const renderInitialRecipes = async (pathname) => {
-    if (pathname === '/meals') {
-      const initialMeals = await fetchMealByName();
-      setRecipes(initialMeals);
-    }
-    if (pathname === '/drinks') {
-      const initialDrinks = await fetchDrinkByName();
-      setRecipes(initialDrinks);
-    }
-  };
+  // Realiza a busca inicial de receitas ao carregar as páginas
+  const renderInitialRecipes = useCallback(async (pathname) => {
+    try {
+      setRecipes([]); 
+      const type = pathname === '/meals' ? 'meals' : 'drinks';
+      let rawData;
 
-  const searchMeals = async () => {
-    const noRecipeError = 'Sorry, we haven\'t found any recipes for these filters.';
-    if (searchMethod === 'ingredient') {
-      const ingredientResults = await fetchMealByIngredient(searchQuery);
-      if (!ingredientResults) { global.alert(noRecipeError); }
-      setRecipes(ingredientResults);
-    } else if (searchMethod === 'name') {
-      const nameResults = await fetchMealByName(searchQuery);
-      if (!nameResults) { global.alert(noRecipeError); }
-      setRecipes(nameResults);
-    } else if (searchMethod === 'firstLetter' && searchQuery.length === 1) {
-      const letterResults = await fetchMealByFirstLetter(searchQuery);
-      if (!letterResults) { global.alert(noRecipeError); }
-      setRecipes(letterResults);
-    } else if (searchMethod === 'firstLetter' && searchQuery.length > 1) {
-      global.alert('Your search must have only 1 (one) character');
-    }
-  };
+      if (pathname === '/meals') {
+        rawData = await fetchMealByName('');
+      } else {
+        // Fallback para bebidas caso a busca por nome retorne vazio
+        rawData = await fetchDrinkByName('');
+        let cleanData = dataExtractor(rawData, 'drinks');
 
-  const searchDrinks = async () => {
-    const noRecipeError = 'Sorry, we haven\'t found any recipes for these filters.';
-    if (searchMethod === 'ingredient') {
-      const ingredientResults = await fetchDrinkByIngredient(searchQuery);
-      if (!ingredientResults) { global.alert(noRecipeError); }
-      setRecipes(ingredientResults);
-    } else if (searchMethod === 'name') {
-      const nameResults = await fetchDrinkByName(searchQuery);
-      if (!nameResults) { global.alert(noRecipeError); }
-      setRecipes(nameResults);
-    } else if (searchMethod === 'firstLetter' && searchQuery.length === 1) {
-      const letterResults = await fetchDrinkByFirstLetter(searchQuery);
-      if (!letterResults) { global.alert(noRecipeError); }
-      setRecipes(letterResults);
-    } else if (searchMethod === 'firstLetter' && searchQuery.length > 1) {
-      global.alert('Your search must have only 1 (one) character');
-    }
-  };
+        if (cleanData.length === 0) {
+          rawData = await fetchDrinkByFirstLetter('a');
+        }
+      }
 
-  const handleSearch = async (pathname) => {
-    if (pathname === '/meals') {
-      await searchMeals();
+      setRecipes(dataExtractor(rawData, type));
+    } catch (error) {
+      console.error("Erro no carregamento inicial:", error);
+      setRecipes([]);
     }
-    if (pathname === '/drinks') {
-      await searchDrinks();
-    }
-  };
+  }, []);
 
-  const contextValue = useMemo(
-    () => ({
-      searchMethod,
-      searchQuery,
-      setSearchMethod,
-      setSearchQuery,
-      recipes,
-      renderInitialRecipes,
-      handleSearch,
-      filters,
-      renderFilters,
-      renderFilteredRecipes,
-    }),
-    [searchMethod, searchQuery, recipes],
-  );
+  // Busca receitas filtradas por categoria específica
+  const renderFilteredRecipes = useCallback(async (pathname, filter) => {
+    const type = pathname === '/meals' ? 'meals' : 'drinks';
+    const rawData = pathname === '/meals' 
+      ? await fetchFilteredMeals(filter) 
+      : await fetchFilteredDrinks(filter);
+    setRecipes(dataExtractor(rawData, type));
+  }, []);
+
+  // Memorização do objeto de contexto para otimização de performance
+  const contextValue = useMemo(() => ({
+    recipes,
+    filters,
+    searchMethod,
+    searchQuery,
+    setSearchMethod,
+    setSearchQuery,
+    renderFilters,
+    renderInitialRecipes,
+    renderFilteredRecipes,
+  }), [recipes, filters, searchMethod, searchQuery, renderFilters, renderInitialRecipes, renderFilteredRecipes]);
 
   return (
     <RecipesContext.Provider value={ contextValue }>
@@ -125,8 +91,6 @@ function ContextProvider({ children }) {
   );
 }
 
-ContextProvider.propTypes = {
-  children: PropTypes.element,
-}.isRequired;
+ContextProvider.propTypes = { children: PropTypes.node.isRequired };
 
 export default ContextProvider;

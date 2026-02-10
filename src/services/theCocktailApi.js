@@ -9,9 +9,10 @@ export async function fetchDrinkByName(name = '') {
   try {
     const response = await fetch(`${nameURL}${name}`);
     const data = await response.json();
-    return data.drinks;
+    return data.drinks || []; // Retorna array vazio se drinks for null
   } catch (error) {
     console.log(error.message);
+    return []; // Proteção contra crash
   }
 }
 
