@@ -4,9 +4,9 @@
 
 ---
 
-## 2. Visão Geral
+## 1. Visão Geral
 
-O **Arquivo Gastronômico** é uma aplicação mobile-first desenvolvida como projeto final do módulo de Front-end na **Trybe**. A aplicação permite que o usuário explore, prepare e gerencie receitas de comida e coquetéis através de uma interface refinada e intuitiva.
+O **Arquivo Gastronômico** é uma aplicação mobile-first desenvolvida como projeto na **Trybe**. A aplicação permite que o usuário explore, prepare e gerencie receitas de comida e coquetéis através de uma interface refinada e intuitiva.
 
 <div align="center">
   <sub>Preview Mobile</sub><br/>
@@ -17,7 +17,7 @@ O grande diferencial desta versão é a **refatoração estética e técnica**, 
 
 ---
 
-## 3. Funcionalidades
+## 2. Funcionalidades
 
 - **Busca Inteligente**: Filtros por nome, ingrediente ou primeira letra.
 - **Categorização Dinâmica**: Alternância rápida entre pratos e bebidas.
@@ -27,7 +27,7 @@ O grande diferencial desta versão é a **refatoração estética e técnica**, 
 
 ---
 
-## 4. Tecnologias & Engenharia
+## 3. Tecnologias & Engenharia
 
 ### Stack Principal
 
@@ -45,7 +45,7 @@ Durante o desenvolvimento, a equipe utilizou **Metodologias Ágeis (Scrum/Kanban
 
 ---
 
-## 5. Instalação e Uso
+## 4. Instalação e Uso
 
 Certifique-se de ter o **Node.js** (versão 16 ou 18) instalado.
 
@@ -64,7 +64,7 @@ Certifique-se de ter o **Node.js** (versão 16 ou 18) instalado.
 
 ---
 
-## 6. Equipe de Desenvolvimento
+## 5. Equipe de Desenvolvimento
 
 Este projeto foi construído em colaboração com:
 
