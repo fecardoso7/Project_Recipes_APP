@@ -1,77 +1,156 @@
-# ARQUIVO GASTRONÔMICO
+cat << 'EOF' > README.md
+# 🍽️ Recipes APP
 
-### Interface Premium de Receitas
+Aplicação web mobile-first para exploração, preparo e gerenciamento de receitas de comidas e bebidas.  
+Projeto desenvolvido na Trybe, com foco em arquitetura React, organização de código e experiência do usuário.
 
 ---
 
-## 1. Visão Geral
+## 1) Visão Geral
 
-O **Arquivo Gastronômico** é uma aplicação mobile-first desenvolvida como projeto na **Trybe**. A aplicação permite que o usuário explore, prepare e gerencie receitas de comida e coquetéis através de uma interface refinada e intuitiva.
+O **Recipes APP** permite que usuários:
+
+- pesquisem receitas de comidas e bebidas,
+- visualizem detalhes e modo de preparo,
+- acompanhem o progresso de receitas em andamento,
+- salvem receitas favoritas.
+
+O projeto passou por uma refatoração estrutural e visual, com melhorias na organização do código, na reutilização de componentes e na consistência do design.
 
 <div align="center">
   <sub>Preview Mobile</sub><br/>
-  <img src="./public/preview.png" alt="Preview" width="350" style="border-radius: 20px; border: 1px solid #333;">
+  <img src="./public/preview.png" alt="Preview da aplicação" width="350" style="border-radius: 16px; border: 1px solid #333;">
 </div>
 
-O grande diferencial desta versão é a **refatoração estética e técnica**, onde apliquei conceitos de _Luxury Minimalist Design_, utilizando Glassmorphism, tipografia técnica e um sistema de design consistente para elevar a experiência do usuário.
+---
+
+## 2) Funcionalidades
+
+- 🔎 **Busca de Receitas**  
+  Pesquisa por nome, ingrediente ou primeira letra.
+
+- 🧩 **Categorias Dinâmicas**  
+  Alternância entre receitas de comidas e bebidas.
+
+- ✅ **Modo de Preparo (In Progress)**  
+  Checklist interativo com persistência de progresso via LocalStorage.
+
+- ⭐ **Sistema de Favoritos**  
+  Gerenciamento de receitas favoritas com armazenamento local.
+
+- 🔗 **Compartilhamento de Links**  
+  Cópia rápida de links com feedback visual ao usuário.
 
 ---
 
-## 2. Funcionalidades
-
-- **Busca Inteligente**: Filtros por nome, ingrediente ou primeira letra.
-- **Categorização Dinâmica**: Alternância rápida entre pratos e bebidas.
-- **Modo de Preparo (In Progress)**: Checklist interativo que salva o progresso localmente para evitar perda de dados.
-- **Sistema de Favoritos**: Gestão de receitas preferidas com persistência em cache.
-- **Cópia de Link**: Funcionalidade de compartilhamento rápido com feedback visual.
-
----
-
-## 3. Tecnologias & Engenharia
+## 3) Tecnologias e Conceitos Aplicados
 
 ### Stack Principal
 
-- **React (Hooks & Context API)**: Para uma arquitetura reativa e gerenciamento de estado global eficiente.
-- **API Integration**: Consumo das bases de dados [TheMealDB](https://www.themealdb.com/) e [TheCocktailDB](https://www.thecocktaildb.com/).
-- **LocalStorage Persistence**: Lógica avançada para sincronização de progresso entre múltiplas telas.
+- **React (Hooks e Context API)**  
+  Componentização, estado global e separação de responsabilidades.
+- **JavaScript (ES6+)**
+- **HTML5 e CSS3**
+- **React Router**
+- **Integração com APIs externas**
+  - TheMealDB (https://www.themealdb.com/)
+  - TheCocktailDB (https://www.thecocktaildb.com/)
 
-### Gestão e Soft Skills
+### Conceitos de Engenharia
 
-Durante o desenvolvimento, a equipe utilizou **Metodologias Ágeis (Scrum/Kanban)** para garantir a entrega e a qualidade do código:
-
-- **Trello**: Gestão de tasks e fluxo de desenvolvimento.
-- **Pair Programming**: Utilização do _Live Share_ para revisão cruzada de código.
-- **Comunicação**: Discord, Slack e reuniões via Zoom.
-
----
-
-## 4. Instalação e Uso
-
-Certifique-se de ter o **Node.js** (versão 16 ou 18) instalado.
-
-1.  **Clone o repositório:**
-    ```bash
-    git clone https://github.com/fecardoso7/Project_Recipes_APP
-    ```
-2.  **Instale as dependências:**
-    ```bash
-    npm install
-    ```
-3.  **Inicie o projeto:**
-    ```bash
-    npm start
-    ```
+- Organização modular de componentes
+- Separação entre UI, lógica e serviços
+- Reutilização de componentes
+- Persistência de dados com LocalStorage
+- Refatoração e melhoria de legibilidade do código
 
 ---
 
-## 5. Equipe de Desenvolvimento
+## 4) Estrutura do Projeto
 
-Este projeto foi construído em colaboração com:
-
-- [**Felipe Cardoso**](https://github.com/fecardoso7) — _UI/UX Design, Refatoração e Padronização._
-- [**João Felipe Zini**](https://github.com/jfzini)
-- [**Luiz Arlochi**](https://github.com/luizArlochi)
-- [**Glenno do Ouro**](https://github.com/glennodoouro)
-- [**Jeoflan Junior**](https://github.com/Jeoflan)
+\`\`\`
+src/
+ ├── components/   # Componentes reutilizáveis
+ ├── pages/        # Páginas da aplicação
+ ├── services/     # Integração com APIs
+ ├── styles/       # Estilos globais e temas
+ ├── utils/        # Funções utilitárias
+ ├── context/      # Estado global (Context API)
+ └── App.js        # Componente principal
+\`\`\`
 
 ---
+
+## 5) Instalação e Execução
+
+### Pré-requisitos
+
+- Node.js (versão 16 ou 18)
+
+### Passos
+
+1. Clone o repositório:
+\`\`\`bash
+git clone https://github.com/fecardoso7/Project_Recipes_APP
+\`\`\`
+
+2. Acesse o diretório do projeto:
+\`\`\`bash
+cd Project_Recipes_APP
+\`\`\`
+
+3. Instale as dependências:
+\`\`\`bash
+npm install
+\`\`\`
+
+4. Execute a aplicação:
+\`\`\`bash
+npm start
+\`\`\`
+
+A aplicação estará disponível em:
+\`\`\`
+http://localhost:3000
+\`\`\`
+
+---
+
+## 6) Melhorias Realizadas
+
+- Refatoração da estrutura de componentes
+- Reorganização da arquitetura do projeto
+- Padronização de estilos e layout
+- Redução de código duplicado
+- Melhoria da legibilidade e manutenção do código
+- Atualização da documentação do projeto
+
+---
+
+## 7) Roadmap de Evolução
+
+- Implementação de hooks customizados
+- Modularização avançada de estilos (CSS Modules ou Styled Components)
+- Melhoria da camada de serviços e estado global
+- Adição de testes automatizados
+- Migração gradual para TypeScript
+
+---
+
+## 8) Equipe de Desenvolvimento
+
+Projeto desenvolvido em colaboração por:
+
+- Felipe Cardoso — UI/UX, refatoração e padronização de código  
+  GitHub: https://github.com/fecardoso7
+- João Felipe Zini — https://github.com/jfzini
+- Luiz Arlochi — https://github.com/luizArlochi
+- Glenno do Ouro — https://github.com/glennodoouro
+- Jeoflan Junior — https://github.com/Jeoflan
+
+---
+
+## 9) Contexto do Projeto
+
+Este projeto foi desenvolvido como parte da formação em desenvolvimento web na Trybe, com foco em React e boas práticas.
+EOF
