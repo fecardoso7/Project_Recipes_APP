@@ -1,4 +1,4 @@
-cat << 'EOF' > README.md
+
 # 🍽️ Recipes APP
 
 Aplicação web mobile-first para exploração, preparo e gerenciamento de receitas de comidas e bebidas.  
@@ -153,4 +153,3 @@ Projeto desenvolvido em colaboração por:
 ## 9) Contexto do Projeto
 
 Este projeto foi desenvolvido como parte da formação em desenvolvimento web na Trybe, com foco em React e boas práticas.
-EOF
