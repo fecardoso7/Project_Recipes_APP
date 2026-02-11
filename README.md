@@ -82,7 +82,6 @@ O projeto passou por uma refatoração estrutural e visual, com melhorias na org
 - Implementação de hooks customizados
 - Modularização avançada de estilos (CSS Modules ou Styled Components)
 - Melhoria da camada de serviços e estado global
-- Adição de testes automatizados
 - Migração gradual para TypeScript
 
 ---
