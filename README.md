@@ -66,57 +66,7 @@ O projeto passou por uma refatoração estrutural e visual, com melhorias na org
 
 ---
 
-## 4) Estrutura do Projeto
-
-\`\`\`
-src/
- ├── components/   # Componentes reutilizáveis
- ├── pages/        # Páginas da aplicação
- ├── services/     # Integração com APIs
- ├── styles/       # Estilos globais e temas
- ├── utils/        # Funções utilitárias
- ├── context/      # Estado global (Context API)
- └── App.js        # Componente principal
-\`\`\`
-
----
-
-## 5) Instalação e Execução
-
-### Pré-requisitos
-
-- Node.js (versão 16 ou 18)
-
-### Passos
-
-1. Clone o repositório:
-\`\`\`bash
-git clone https://github.com/fecardoso7/Project_Recipes_APP
-\`\`\`
-
-2. Acesse o diretório do projeto:
-\`\`\`bash
-cd Project_Recipes_APP
-\`\`\`
-
-3. Instale as dependências:
-\`\`\`bash
-npm install
-\`\`\`
-
-4. Execute a aplicação:
-\`\`\`bash
-npm start
-\`\`\`
-
-A aplicação estará disponível em:
-\`\`\`
-http://localhost:3000
-\`\`\`
-
----
-
-## 6) Melhorias Realizadas
+## 4) Melhorias Realizadas
 
 - Refatoração da estrutura de componentes
 - Reorganização da arquitetura do projeto
@@ -127,7 +77,7 @@ http://localhost:3000
 
 ---
 
-## 7) Roadmap de Evolução
+## 5) Roadmap de Evolução
 
 - Implementação de hooks customizados
 - Modularização avançada de estilos (CSS Modules ou Styled Components)
@@ -137,7 +87,7 @@ http://localhost:3000
 
 ---
 
-## 8) Equipe de Desenvolvimento
+## 6) Equipe de Desenvolvimento
 
 Projeto desenvolvido em colaboração por:
 
@@ -150,6 +100,6 @@ Projeto desenvolvido em colaboração por:
 
 ---
 
-## 9) Contexto do Projeto
+## 7) Contexto do Projeto
 
 Este projeto foi desenvolvido como parte da formação em desenvolvimento web na Trybe, com foco em React e boas práticas.
